@@ -17,6 +17,10 @@ module.exports = function(app) {
 			utils.sendError(res, 'Inform at least one ticker', 400)
 		}
 
+		if (tickers.endsWith(';')) {
+			tickers = tickers.substring(0, tickers.length - 1);
+		}
+
 		//Split the tickers into a dictionay and create a dictionary from it
 		var tickersArray = tickers.split(';');
 		var tickersList = {};
