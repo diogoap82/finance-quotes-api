@@ -18,7 +18,7 @@ var getHttpData = function(ticker, callbackSuccess, callbackError) {
 				callbackSuccess(ticker, data.text());
 			})
 		} else {
-			callbackError(error);
+			callbackError(error, 404);
 		}
 	})
 }
