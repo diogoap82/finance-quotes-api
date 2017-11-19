@@ -52,7 +52,7 @@ module.exports = function(app) {
 			function(result){
 				res.set('Content-Type', 'application/octet-stream');
 				res.setHeader('Content-disposition', 'attachment; filename=quotes.csv');
-				res.send(Object.values(result).join('\n'));
+				res.send(Object.values(result).join('\n') + '\r\n');
 			},
 			function(error, status) {
 				utils.sendError(res, error, status);
