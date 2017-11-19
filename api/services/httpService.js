@@ -14,7 +14,6 @@ var getHttpData = function(ticker, callbackSuccess, callbackError) {
 
 			$('.Trsdu\\(0\\.3s\\).Fw\\(b\\).Fz\\(36px\\).Mb\\(-4px\\).D\\(ib\\)').filter(function(){
 				var data = $(this);
-
 				callbackSuccess(ticker, data.text());
 			})
 		} else {
