@@ -23,7 +23,7 @@ var getHttpDataYahoo = function(ticker, callbackSuccess, callbackError) {
 }
 
 var getHttpDataInvesting = function(ticker, callbackSuccess, callbackError) {
-	var parsedTicker = ticker.replace('.', '/');
+	var parsedTicker = ticker.replace('_', '/');
 	var url = 'https://m.br.investing.com/' + parsedTicker;
 
 	console.log(url);
