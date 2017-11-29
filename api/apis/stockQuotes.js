@@ -24,7 +24,7 @@ var getStockQuotes = function(tickers, callbackSuccess, callbackError) {
 	for (var ticker in tickersList) {
 		console.log('Retrieving data for ticker ' + ticker);
 
-		http.getHttpData(ticker,
+		http.getHttpDataInvesting(ticker,
 			function(tickerRes, lastPriceRes) {
 				console.log('Data returned for ticker ' + tickerRes + ' - Last price: ' + lastPriceRes);
 				tickersList[tickerRes] = lastPriceRes;
