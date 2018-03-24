@@ -37,10 +37,10 @@ var getHttpDataInvesting = function (ticker, callbackSuccess, callbackError) {
 			var $ = cheerio.load(html);
 
 			console.log('	getHttpDataInvesting - Loaded for ' + ticker);
-
+			
 			$('.quotesBoxTop').filter(function () {
 				var data = $(this).find('span').first();
-				callbackSuccess(ticker, data.text());
+				callbackSuccess(ticker, data.text().replace(/[\r\n|\s] /g,''));
 			})
 		} else {
 			callbackError(error, response.statusCode);
