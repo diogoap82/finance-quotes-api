@@ -43,6 +43,8 @@ var getHttpDataInvesting = function (ticker, callbackSuccess, callbackError) {
 				callbackSuccess(ticker, data.text().replace(/[\r\n|\s] /g,''));
 			})
 		} else {
+			console.log('Eror HTML');
+			console.log(html);
 			callbackError(error, response.statusCode);
 		}
 	})
