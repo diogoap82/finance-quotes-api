@@ -44,7 +44,7 @@ var getStockQuotes = function(tickers, callbackSuccess, callbackError) {
 module.exports = function(app) {
 
 	app.get('/api/status', function(req, res) {
-		res.json('ok');
+		res.json('ok - ' + new Date().toISOString());
 	})
 
     app.get('/api/stock/quotes/csv/:id', function(req, res) {
