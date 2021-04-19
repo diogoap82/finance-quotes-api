@@ -5,7 +5,7 @@ const fetch = require("node-fetch");
 
 var getHttpDataInvesting = function (ticker, callbackSuccess, callbackError) {
   var parsedTicker = ticker.replace("_", "/").replace("!", "?");
-  var url = `https://investing.com/${parsedTicker}`;
+  var url = `https://www.investing.com/${parsedTicker}`;
   const options = {
     method: "GET",
     headers: {
@@ -16,15 +16,26 @@ var getHttpDataInvesting = function (ticker, callbackSuccess, callbackError) {
 
   fetch(url, options)
     .then((res) => {
-      console.log(`Request for ${ticker} completed. StatusCode: ${res.status}`);
-
       if (res.status == 200) {
-        console.log(`** OK ** getHttpDataInvesting - Loaded for ${ticker}`);
+        console.log(
+          `Request for ${ticker} completed. StatusCode: ${res.status}`
+        );
 
         res.text().then((body) => {
+          console.log(`** OK ** - getHttpDataInvesting - Loaded for ${ticker} - URL: ${url}`);
           const $ = cheerio.load(body);
-          var data = $('[data-test="instrument-price-last"]').text();
-          callbackSuccess(ticker, data);
+          var priceText = $('#last_last').text();
+
+          if (priceText.length == 0) {
+            console.log(`Cannot find price for ${ticker} with <#last_last> selector. Trying with <instrument-price-last>`);
+
+            priceText = $('[data-test="instrument-price-last"]').text();
+
+            if (priceText.length == 0) {
+              console.log(`** ERROR *** - Cannot find price for ${ticker}`);
+            }
+          }
+          callbackSuccess(ticker, priceText);
         });
       } else {
         const error = `Request for ${ticker} was not successful. URL: ${url}`;
